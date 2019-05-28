@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.xiaox.studydemo">
 
-    <permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -19,10 +23,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".aboutBinder.Client"
-            />
+        <activity android:name=".aboutBinder.Client"/>
+        <activity android:name=".aboutDownload.DownloadActivty"/>
         <service android:name=".aboutBinder.Service"
                 android:process="com.xiaox.studydemo.secondProcess"
+            />
+
+        <service android:name=".aboutDownload.DownloadServer"
             />
 
 

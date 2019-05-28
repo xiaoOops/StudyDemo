@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.xiaox.studydemo.aboutBinder.Client;
+import com.xiaox.studydemo.aboutDownload.DownloadActivty;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mIntent = new Intent();
         findViewById(R.id.btn_mvvm).setOnClickListener(this);
         findViewById(R.id.btn_binder).setOnClickListener(this);
+        findViewById(R.id.btn_down).setOnClickListener(this);
     }
 
     @Override
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_binder:
                 mIntent.setClass(MainActivity.this, Client.class);
+                startActivity(mIntent);
+                break;
+            case R.id.btn_down:
+                mIntent.setClass(MainActivity.this, DownloadActivty.class);
                 startActivity(mIntent);
                 break;
 
