@@ -1,5 +1,6 @@
 package com.xiaox.studydemo;
 
+import com.xiaox.studydemo.aboutDataStructure.LinkedList.SingleLinkedList;
 import com.xiaox.studydemo.aboutDataStructure.SimpleList;
 
 /**
@@ -20,8 +21,21 @@ public class Test {
         //        System.out.println(MODE_MASK);
 
 
-        checkSimpleList();
+        checkSingleList();
 
+    }
+
+
+    private static void checkSingleList() {
+        SingleLinkedList list = new SingleLinkedList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.insertNodeByIndex(666, 4);
+        //list.delNodeByIndex(1);
+        System.out.println(list.toString());
+        System.out.println("size =" + list.size());
     }
 
     private static void checkSimpleList() {
@@ -38,7 +52,7 @@ public class Test {
         list.add(10);
 
         list.delete(1);
-        list.insert(99,0);
+        list.insert(99, 0);
 
         System.out.println(list.toString());
 
