@@ -2,6 +2,7 @@ package com.xiaox.studydemo.aboutDownload;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,8 @@ import java.io.RandomAccessFile;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.xiaox.studydemo.MainActivity.TAG;
 
 /**
  * @version V1.0
@@ -54,6 +57,8 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
                 downloadedLength = file.length();
             }
             long contentLength = getContentLength(downloadUrl);
+            Log.i(TAG, "contentLength = " + contentLength);
+            Log.i(TAG, "downloadedLength = " + downloadedLength);
             if (contentLength == 0) {
                 return TYPE_FAIL;
             } else if (contentLength == downloadedLength) {
@@ -83,10 +88,12 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
                         total += len;
                         savedFile.write(b, 0, len);
                         //计算已下载的百分比
-                        int progress = (int) ((total + downloadedLength) / contentLength * 100);
+                        int progress = (int) ((total + downloadedLength) * 100 / contentLength);
                         publishProgress(progress);
                     }
                 }
+                response.body().close();
+                return TYPE_SUCCESS;
 
             }
         } catch (IOException e) {

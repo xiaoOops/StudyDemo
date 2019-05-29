@@ -67,8 +67,10 @@ public class DownloadActivty extends AppCompatActivity implements View.OnClickLi
                 mBinder.onStart("https://raw.githubusercontent.com/guolindev/eclipse/master/eclipse-inst-win64.exe");
                 break;
             case R.id.btn_pause:
+                mBinder.onPause();
                 break;
             case R.id.btn_cancel:
+                mBinder.onCancel();
                 break;
         }
     }
