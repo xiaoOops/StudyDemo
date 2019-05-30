@@ -22,7 +22,6 @@ public class Test {
 
 
         checkSingleList();
-
     }
 
 
@@ -32,9 +31,10 @@ public class Test {
         list.add(2);
         list.add(3);
         list.add(4);
-        list.insertNodeByIndex(666, 4);
+        list.insertNodeByIndex(666, 2);
         //list.delNodeByIndex(1);
         System.out.println(list.toString());
+        System.out.println(list.get(2));
         System.out.println("size =" + list.size());
     }
 

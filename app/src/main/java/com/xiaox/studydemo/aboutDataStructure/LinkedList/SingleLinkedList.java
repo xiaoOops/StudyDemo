@@ -101,6 +101,45 @@ public class SingleLinkedList {
     }
 
 
+    /**
+     * 获取对应位置的节点
+     */
+    public int get(int index) {
+        if (!isElementIndex(index)) {
+            return -1;
+        }
+        Node node = first;
+        int result = -1;
+        for (int i = 0; i < size; i++) {
+            if (i == index) {
+                result = node.data;
+                break;
+            }
+            node = node.next;
+        }
+        return result;
+    }
+
+    /*
+        源码实现，判断index大小，小于size的一半，就从first开始遍历
+        大于size的一半，就从last开始遍历
+        Node<E> node(int index) {
+            // assert isElementIndex(index);
+
+            if (index < (size >> 1)) {
+                Node<E> x = first;
+                for (int i = 0; i < index; i++)
+                    x = x.next;
+                return x;
+            } else {
+                Node<E> x = last;
+                for (int i = size - 1; i > index; i--)
+                    x = x.prev;
+                return x;
+            }
+        }
+    */
+
     public int size() {
         return size;
     }
