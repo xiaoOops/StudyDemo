@@ -45,7 +45,7 @@ public class VerifySquenceOfBST {
     }
 
 
-    // TODO: 2019/6/11 利用递归
+    // TODO: 2019/6/11 利用递归实现
 }
 
 
