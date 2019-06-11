@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class FindNumbersWithSum {
 
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 5};
-        int sum = 5;
-        System.out.println("list = " + FindNumbersWithSum(array, sum));
+        int[] array = {1, 2, 4, 7, 11, 15};
+        int sum = 15;
+        System.out.println("list = " + FindNumbersWithSum1(array, sum));
     }
 
 
@@ -26,11 +26,38 @@ public class FindNumbersWithSum {
                 if (array[j] == sum - array[i]) {
                     list.add(array[i]);
                     list.add(array[j]);
-                    break;
+                    //因为 array 是有序的，所有在有多组满足题意的情况下，直接是最前面的组合的乘积就是最小的了，
+                    // 所以直接返回就可以
+                    return list;
                 }
             }
         }
         return list;
+    }
+
+
+    /**
+     * 利用好题干中的已排序数组这个条件，从头尾分别夹逼着来得出答案
+     */
+    public static ArrayList<Integer> FindNumbersWithSum1(int[] array, int sum) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int start = 0;
+        int last = array.length - 1;
+        while (start < last) {
+            if (array[start] + array[last] == sum) {
+                list.add(array[start]);
+                list.add(array[last]);
+                break;
+            } else if (array[start] + array[last] > sum) {
+                //如果大于 sum，说明其中一个数大了，array[start] 已经是最小的数，所以将 last--
+                last--;
+            } else {
+                //如果小于 sum，说明其中一个数小了，array[last] 已经是最大的数，所以将 start++
+                start++;
+            }
+        }
+        return list;
+
     }
 
 
