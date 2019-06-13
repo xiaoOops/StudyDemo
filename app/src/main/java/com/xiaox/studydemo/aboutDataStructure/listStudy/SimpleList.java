@@ -1,4 +1,4 @@
-package com.xiaox.studydemo.aboutDataStructure;
+package com.xiaox.studydemo.aboutDataStructure.listStudy;
 
 import java.util.Arrays;
 

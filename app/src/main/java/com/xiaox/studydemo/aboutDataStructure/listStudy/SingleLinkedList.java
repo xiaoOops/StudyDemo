@@ -1,4 +1,4 @@
-package com.xiaox.studydemo.aboutDataStructure.LinkedList;
+package com.xiaox.studydemo.aboutDataStructure.listStudy;
 
 /**
  * @version V1.0

@@ -1,7 +1,7 @@
 package com.xiaox.studydemo;
 
-import com.xiaox.studydemo.aboutDataStructure.LinkedList.SingleLinkedList;
-import com.xiaox.studydemo.aboutDataStructure.SimpleList;
+import com.xiaox.studydemo.aboutDataStructure.listStudy.SingleLinkedList;
+import com.xiaox.studydemo.aboutDataStructure.listStudy.SimpleList;
 
 /**
  * @version V1.0
