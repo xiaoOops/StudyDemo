@@ -32,8 +32,8 @@ public class ReverseList {
         //需要pre和next的目的是让当前节点从pre->head->next1->next2变成pre<-head next1->next2
         //即pre让节点可以反转所指方向，但反转之后如果不用next节点保存next1节点的话，此单链表就此断开了
         //所以需要用到pre和next两个节点
-        //1->2->3->4->5
-        //1<-2<-3 4->5
+        //1 -> 2 -> 3 -> 4 -> 5
+        //1 <- 2 <- 3  4 -> 5
         ListNode pre = null;
         ListNode next = null;
         while (head != null) {
