@@ -51,7 +51,7 @@ public class FindPath {
         if (root.val < target && root.left != null) {
             //继续向下找
             list.add(root.val);
-            FindPath(root.left, target - root.val);
+            FindPath1(root.left, target - root.val);
         } else if (root.val == target) {
             list.add(root.val);
             path.add(new ArrayList<Integer>(list));
@@ -62,7 +62,7 @@ public class FindPath {
         if (root.val < target && root.right != null) {
             //继续向下找
             list.add(root.val);
-            FindPath(root.right, target - root.val);
+            FindPath1(root.right, target - root.val);
         } else if (root.val == target) {
             list.add(root.val);
             path.add(new ArrayList<Integer>(list));
