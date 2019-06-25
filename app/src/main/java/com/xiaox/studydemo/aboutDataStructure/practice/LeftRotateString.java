@@ -41,6 +41,9 @@ public class LeftRotateString {
     /**
      * abcXYZdef
      * 3
+     *
+     * 原理：YX = (XTYT)T
+     * 将X旋转之后再将Y旋转，最后再整体旋转
      */
     public static String LeftRotateString2(String str, int n) {
         if (n > str.length())
