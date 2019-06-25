@@ -43,6 +43,7 @@ public class LeftRotateString {
      * 3
      *
      * 原理：YX = (XTYT)T
+     * 假设字符串abcdef，n=3，设X=abc，Y=def，所以字符串可以表示成XY，如题干，问如何求得YX。假设X的翻转为XT，XT=cba，同理YT=fed，那么YX=(XTYT)T
      * 将X旋转之后再将Y旋转，最后再整体旋转
      */
     public static String LeftRotateString2(String str, int n) {
