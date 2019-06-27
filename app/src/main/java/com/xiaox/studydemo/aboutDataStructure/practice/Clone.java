@@ -7,22 +7,33 @@ package com.xiaox.studydemo.aboutDataStructure.practice;
  */
 public class Clone {
 
+
+    public static void main(String[] args){
+        RandomListNode node1=new RandomListNode(1);
+        RandomListNode node2=new RandomListNode(2);
+        RandomListNode node3=new RandomListNode(3);
+
+        node1.next =node2;
+        node2.next=node3;
+
+        RandomListNode clone = Clone(node1);
+
+    }
+
     /**
      * todo 错的，看看书？
      */
-    public RandomListNode Clone(RandomListNode pHead) {
+    public static RandomListNode Clone(RandomListNode pHead) {
         RandomListNode newPHead = new RandomListNode(0);
-        if (pHead == null) {
-            return newPHead;
+        newPHead.next = pHead;
+        RandomListNode pre = newPHead.next;
+        while (pre != null) {
+            pre = pre.next;
         }
-        newPHead.label = pHead.label;
-        newPHead.next = pHead.next;
-        newPHead.random = pHead.random;
-        Clone(pHead.next);
-        return newPHead;
+        return newPHead.next;
     }
 
-    public class RandomListNode {
+    public static class RandomListNode {
         int label;
         RandomListNode next = null;
         RandomListNode random = null;
