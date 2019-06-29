@@ -16,7 +16,7 @@ public class Duplicate {
     public static void main(String[] args) {
         int[] numbers = {2, 1, 3, 1, 4};
         int leng = 5;
-
+        duplicate1(numbers,leng,new int[1]);
     }
 
     /**
@@ -49,23 +49,22 @@ public class Duplicate {
     /**
      * 不需要额外的数组或者map来保存，题目里写了数组里数字的范围保证在0 ~ n-1 之间，所以可以利用现有数组设置标志，
      * 当一个数字被访问过后，可以设置对应位上的数 + n，之后再遇到相同的数时，会发现对应位上的数已经大于等于n了，那么直接返回这个数即可
+     * todo 不理解！！
+     *  2, 1, 3, 1, 4
      */
-    public boolean duplicate1(int numbers[], int length, int[] duplication) {
-        boolean flag = false;
-        if (numbers == null || numbers.length > length) {
-            return false;
-        }
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < numbers.length; i++) {
-            if (list.contains(numbers[i])) {
-                duplication[0] = numbers[i];
-                flag = true;
-                break;
-            } else {
-                list.add(numbers[i]);
+    public static boolean duplicate1(int numbers[], int length, int[] duplication) {
+        for (int i = 0; i < length; i++) {
+            int number = numbers[i];
+            if (number >= length) {
+                number -= length;
             }
+            if (numbers[number] >= length) {
+                duplication[0] = number;
+                return true;
+            }
+            numbers[number] = numbers[number] + length;
         }
-        return flag;
+        return false;
     }
 
 
