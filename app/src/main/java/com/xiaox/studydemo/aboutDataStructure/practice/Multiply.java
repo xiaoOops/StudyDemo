@@ -10,7 +10,7 @@ public class Multiply {
     public static void main(String[] args) {
         int[] A = {1, 2, 3, 4, 5};
         //multiply(A);
-        int result = getResult(A, 3);
+        int result = getResult(A, 0);
         System.out.println("result = " + result);
     }
 
@@ -28,13 +28,29 @@ public class Multiply {
 
     /**
      * 怎么理解递归？？？
+     * 计算数组乘积
+     *
+     * @param a     数组
+     * @param index 从数组第几个索引开始计算乘积
      */
-    private static int getResult(int[] A, int index) {
-        if (index == 0) {
-            return A[0];
+    private static int getResult(int[] a, int index) {
+
+        if (index < a.length - 1) {
+            return a[index] * getResult(a, index + 1);
+        } else {
+            //递归到数组最后一个元素了
+            return a[index];
         }
-        return getResult(A, index) * getResult(A, index - 1);
     }
+    /**
+     *    上面的递归一层层展开后大体是这样的：
+     *
+     *    arr[0] * sum(1,arr)
+     *    arr[0] * arr[1] * sum(2,arr)
+     *    arr[0] * arr[1] * arr[2] * sum(3, arr)
+     *    arr[0] * arr[1] * arr[2] * arr[3] * sum(4, arr)
+     *    arr[0] * arr[1] * arr[2] * arr[3] * arr[4]
+     */
 
 
 }
