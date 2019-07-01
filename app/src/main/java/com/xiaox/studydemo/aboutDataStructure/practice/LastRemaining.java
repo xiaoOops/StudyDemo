@@ -35,6 +35,7 @@ public class LastRemaining {
                 i = 0;
             }
             if (array[i] == -1) {//剔除数到m的小朋友
+
                 continue;
             }
             step++;//被剔除的小朋友不能数了，所以在之后++
