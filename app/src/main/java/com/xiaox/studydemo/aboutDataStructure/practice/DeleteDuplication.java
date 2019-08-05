@@ -11,10 +11,14 @@ public class DeleteDuplication {
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(4);
+        ListNode node5 = new ListNode(4);
         node1.next = node2;
         node2.next = node2;
         node2.next = node3;
-        deleteDuplication(node1);
+        node3.next = node4;
+        node4.next = node5;
+        ListNode listNode = deleteDuplication(node1);
     }
 
     /**
@@ -40,7 +44,7 @@ public class DeleteDuplication {
                 }
                 //将重复的节点的下一个赋值给pre和last指针，即抛弃了重复节点
                 pre.next = last.next;
-                last = last.next;
+                break;
             } else {
                 pre = pre.next;
                 last = last.next;

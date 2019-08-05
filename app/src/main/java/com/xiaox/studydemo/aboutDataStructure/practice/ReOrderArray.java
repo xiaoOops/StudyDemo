@@ -8,6 +8,12 @@ import java.util.ArrayList;
  */
 public class ReOrderArray {
 
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5};
+        reOrderArray1(array);
+        Util.printArray(array);
+    }
+
 
     public void reOrderArray(int[] array) {
         ArrayList<Integer> oddList = new ArrayList<>();
@@ -24,5 +30,50 @@ public class ReOrderArray {
             array[i] = oddList.get(i);
         }
     }
+
+
+    /**
+     * 这种解法空间复杂度为O(1)，但是不满足奇数和奇数，偶数和偶数之间的相对位置不变这个条件
+     * 思路：设置2个指针，begin指向数组首位，end指向末尾，begin向后移动，知道找到偶数，end向前移动，直到找到奇数，
+     * 当begin指向偶数，end指向奇数时，交换这两个数，继续移动指针，直到begin的位置大于end，说明已经扫描完整个数组
+     */
+    private static void reOrderArray1(int[] array) {
+        if (array == null || array.length == 0) {
+            return;
+        }
+        int begin = 0;
+        int end = array.length - 1;
+        while (begin < end) {
+            while (array[begin] % 2 != 0) {
+                begin++;
+            }
+            while (array[end] % 2 == 0) {
+                end--;
+            }
+            if (begin < end) {
+                int temp = array[begin];
+                array[begin] = array[end];
+                array[end] = temp;
+            }
+        }
+    }
+
+
+    /**
+     * 为了保证偶数和偶数，奇数和奇数的相对位置不变
+     */
+    private static void reOrderArray2(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = array.length - 1; j > i; j--) {
+                //前偶后奇交换
+                if (array[j] % 2 == 1 && array[j - 1] % 2 == 0) {
+                    int temp = array[j];
+                    array[j] = array[j - 1];
+                    array[j - 1] = temp;
+                }
+            }
+        }
+    }
+
 
 }

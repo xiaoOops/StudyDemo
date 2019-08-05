@@ -6,20 +6,20 @@ import java.util.Stack;
  * 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
  * 二叉树的镜像定义：
  * <p>
- *
- *          源二叉树
- *  *     	    8
- *  *     	   /  \
- *  *     	  6   10
- *  *     	 / \  / \
- *  *     	5  7 9 11
- *  *
- *  *     	镜像二叉树
- *  *     	    8
- *  *     	   /  \
- *  *     	  10   6
- *  *     	 / \  / \
- *  *     	11 9 7  5
+ * <p>
+ * 源二叉树
+ * *     	    8
+ * *     	   /  \
+ * *     	  6   10
+ * *     	 / \  / \
+ * *     	5  7 9 11
+ * *
+ * *     	镜像二叉树
+ * *     	    8
+ * *     	   /  \
+ * *     	  10   6
+ * *     	 / \  / \
+ * *     	11 9 7  5
  * ---------------------
  *
  * @date 2019/6/30
@@ -82,21 +82,20 @@ public class IsSymmetrical {
     private static boolean isTheMirror(TreeNode left, TreeNode right) {
         if (left == null || right == null) {
             return left == right;
-        }else if(left != null && right != null) {
-            if(left.val != right.val) {
+        } else {
+            if (left.val != right.val) {
                 return false;
-            }else if(isTheMirror(left.left,right.right) && isTheMirror(left.right,right.left)) {
+            } else {
                 //这里是用左子树的左子树和右子树的右子树比较 && 左子树的右子树和右子树的左子树比较
-                return true;
+                return isTheMirror(left.left, right.right) && isTheMirror(left.right, right.left);
             }
         }
-        return false;
     }
 
 
     /**
      * 非递归实现
-     *  使用一个stack来装左右子树，并分别比较
+     * 使用一个stack来装左右子树，并分别比较
      */
     public static boolean isSymmetrical1(TreeNode pRoot) {
         if (pRoot == null) {
@@ -105,15 +104,16 @@ public class IsSymmetrical {
         Stack<TreeNode> stack = new Stack<>();
         stack.push(pRoot.left);
         stack.push(pRoot.right);
-        while (!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             //成对取出
             TreeNode node1 = stack.pop();
             TreeNode node2 = stack.pop();
-            if (node1 == null && node2 == null) continue;
-            if(node1 == null || node2 == null) {
+            if (node1 == null && node2 == null)
+                continue;
+            if (node1 == null || node2 == null) {
                 return node1 == node2;
             }
-            if(node1.val != node2.val) {
+            if (node1.val != node2.val) {
                 return false;
             }
             //成对入栈
@@ -124,9 +124,6 @@ public class IsSymmetrical {
         }
         return true;
     }
-
-
-
 
 
     /**
@@ -173,9 +170,7 @@ public class IsSymmetrical {
 
         public TreeNode(int val) {
             this.val = val;
-
         }
-
     }
 
 }

@@ -1,9 +1,8 @@
 package com.xiaox.studydemo.aboutDataStructure.practice;
 
 /**
- * @Description: 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
  * @date 2019/6/19
- * @author:xiaox
+ * 25：合并两个排序的链表。输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
  */
 public class MergeList {
 
@@ -31,61 +30,68 @@ public class MergeList {
     /**
      * 递归思想
      */
-    public  static ListNode merge1(ListNode list1, ListNode list2) {
+    private static ListNode merge1(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
         }
         if (list2 == null) {
             return list1;
         }
+        ListNode head;
         if (list1.val <= list2.val) {
+            head = list1;
             //list1.val 比 list2.val 小，小的保存起来，继续用list1.next去与list2比较
-            list1.next = merge1(list1.next, list2);
+            head.next = merge1(list1.next, list2);
             return list1;
         } else {
-            list2.next = merge1(list1, list2.next);
-            return list2;
+            head = list2;
+            head.next = merge1(list1, list2.next);
         }
+        return head;
     }
 
 
     /**
      * 将 list1 的头节点与 list2 的头结点比，小的存起来，指针向后移一位，继续比较...
      */
-    public static ListNode merge(ListNode list1, ListNode list2) {
+    private static ListNode merge(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
         }
         if (list2 == null) {
             return list1;
         }
+        //用一个node保存新的listnode的头节点
         ListNode mergeHead = null;
-        ListNode current = null;
+        ListNode newNode = null;
         while (list1 != null && list2 != null) {
             if (list1.val <= list2.val) {
                 if (mergeHead == null) {
-                    mergeHead = current = list1;
+                    mergeHead = list1;
+                    newNode = list1;
                 } else {
-                    //将小的数字存起来
-                    current.next = list1;
-                    //新的listnode的指针也需要向后移动
-                    current = current.next;
+                    //将更小的那个listNode拼接到新的listNode后面
+                    newNode.next = list1;
+                    //移动指针
+                    newNode = newNode.next;
                 }
+                //移动指针
                 list1 = list1.next;
             } else {
                 if (mergeHead == null) {
-                    mergeHead = current = list2;
+                    mergeHead = list2;
+                    newNode = list2;
                 } else {
-                    current.next = list2;
-                    current = current.next;
+                    newNode.next = list2;
+                    newNode = newNode.next;
                 }
                 list2 = list2.next;
             }
         }
         if (list1 == null) {
-            current.next = list2;
+            newNode.next = list2;
         } else {
-            current.next = list1;
+            newNode.next = list1;
         }
         return mergeHead;
     }

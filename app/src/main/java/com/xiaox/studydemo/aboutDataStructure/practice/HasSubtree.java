@@ -1,7 +1,7 @@
 package com.xiaox.studydemo.aboutDataStructure.practice;
 
 /**
- * @Description: 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+ * 26:输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
  * @date 2019/6/19
  */
 public class HasSubtree {
@@ -9,7 +9,7 @@ public class HasSubtree {
 
     public boolean HasSubtree(TreeNode root1, TreeNode root2) {
         boolean result = false;
-        //当Tree1和Tree2都不为零的时候，才进行比较。否则直接返回false
+        //当Tree1和Tree2都不为null的时候，才进行比较。否则直接返回false
         if (root2 != null && root1 != null) {
             //如果找到了对应Tree2的根节点的点
             if (root1.val == root2.val) {
@@ -20,7 +20,6 @@ public class HasSubtree {
             if (!result) {
                 result = HasSubtree(root1.left, root2);
             }
-
             //如果还找不到，那么就再去root的右儿子当作起点，去判断时候包含Tree2
             if (!result) {
                 result = HasSubtree(root1.right, root2);
