@@ -148,10 +148,10 @@ public class RxJavaDemoActivity extends AppCompatActivity implements View.OnClic
     private void rxConcat() {
         //concat（） / concatArray（）
         //concat（）组合被观察者数量≤4个，而concatArray（）则可＞4个
-        Observable.concatArray(Observable.just(1, 2, 3),
+        Observable.concatArrayDelayError(Observable.just(1, 2, 3),
                 Observable.just(4, 5, 6),
                 Observable.just(7, 8, 9),
-                Observable.just(10, 11, 12),
+                Observable.<Integer>empty(),
                 Observable.just(13, 14, 15))
                 .subscribe(new Observer<Integer>() {
                     @Override
