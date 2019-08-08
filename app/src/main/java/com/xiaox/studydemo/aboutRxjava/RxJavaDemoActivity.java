@@ -39,6 +39,7 @@ public class RxJavaDemoActivity extends AppCompatActivity implements View.OnClic
 
 
     private String TAG = "xiaoxTag";
+    private boolean flag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class RxJavaDemoActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btn_concat).setOnClickListener(this);
         findViewById(R.id.btn_merge).setOnClickListener(this);
         findViewById(R.id.btn_combine).setOnClickListener(this);
+        findViewById(R.id.btn_flatMap).setOnClickListener(this);
+        findViewById(R.id.btn_changeFlag).setOnClickListener(this);
     }
 
     @Override
@@ -77,7 +80,176 @@ public class RxJavaDemoActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_combine:
                 combine();
                 break;
+            case R.id.btn_flatMap:
+                //flatMap();
+//                flatMap1();
+                flatMap2();
+                break;
+            case R.id.btn_changeFlag:
+                flag = true;
+                break;
         }
+    }
+
+    @SuppressWarnings("all")
+    private void flatMap2() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                emitter.onNext(Observable.just(1));
+            }
+        })
+                .flatMap(new Function<Object, ObservableSource<Test1>>() {
+                    @Override
+                    public ObservableSource<Test1> apply(Object o) throws Exception {
+                        if (flag) {
+                            return null;
+                        } else {
+                            final Test1 test1 = new Test1();
+                            test1.name = "aaaaa";
+                            Observable<Test1> commonObservable = Observable.create(new ObservableOnSubscribe<Test1>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Test1> emitter) throws Exception {
+                                    emitter.onNext(test1);
+                                }
+                            });
+                            return commonObservable;
+                        }
+                    }
+                })
+                .flatMap(new Function<Test1, ObservableSource<Test2>>() {
+                    @Override
+                    public ObservableSource<Test2> apply(final Test1 test1) throws Exception {
+                        final Test2 test2 = new Test2();
+                        test2.name = "bbbbb";
+                        return Observable.create(new ObservableOnSubscribe<Test2>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<Test2> emitter) throws Exception {
+                                emitter.onNext(test2);
+                            }
+                        });
+                    }
+                })
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Log.i(TAG, "result = " + o);
+                        if (o instanceof Test1) {
+                            Log.i(TAG, "Test1 = " + ((Test1) o).name);
+                        } else if (o instanceof Test2) {
+                            Log.i(TAG, "Test2 = " + ((Test2) o).name);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.i(TAG, " throwable " + throwable);
+                    }
+                });
+    }
+
+    @SuppressWarnings("all")
+    private void flatMap1() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                emitter.onNext(Observable.just(1));
+            }
+        })
+                .flatMap(new Function<Object, ObservableSource<Test1>>() {
+                    @Override
+                    public ObservableSource<Test1> apply(Object o) throws Exception {
+                        if (flag) {
+                            return null;
+                        } else {
+                            final Test1 test1 = new Test1();
+                            test1.name = "aaaaa";
+                            Observable<Test1> commonObservable = Observable.create(new ObservableOnSubscribe<Test1>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Test1> emitter) throws Exception {
+                                    emitter.onNext(test1);
+                                }
+                            });
+                            return commonObservable;
+                        }
+                    }
+                })
+                .flatMap(new Function<Test1, ObservableSource<Test2>>() {
+                    @Override
+                    public ObservableSource<Test2> apply(final Test1 test1) throws Exception {
+                        final Test2 test2 = new Test2();
+                        test2.name = "bbbbb";
+                        return Observable.create(new ObservableOnSubscribe<Test2>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<Test2> emitter) throws Exception {
+                                emitter.onNext(test2);
+                            }
+                        });
+                    }
+                })
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Log.i(TAG, "result = " + o);
+                        if (o instanceof Test1) {
+                            Log.i(TAG, "Test1 = " + ((Test1) o).name);
+                        } else if (o instanceof Test2) {
+                            Log.i(TAG, "Test2 = " + ((Test2) o).name);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.i(TAG, " throwable " + throwable);
+                    }
+                });
+    }
+
+    @SuppressWarnings("all")
+    private void flatMap() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                Test2 test2 = new Test2();
+                test2.name = "bbb";
+                emitter.onNext(test2);
+            }
+        })
+                .flatMap(new Function<Object, ObservableSource<Common>>() {
+                    @Override
+                    public ObservableSource<Common> apply(Object o) throws Exception {
+                        if (flag) {
+                            final Test1 test1 = new Test1();
+                            test1.name = "aaaaa";
+                            Observable<Common> commonObservable = Observable.create(new ObservableOnSubscribe<Common>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Common> emitter) throws Exception {
+                                    emitter.onNext(test1);
+                                }
+                            });
+                            return commonObservable;
+                        } else {
+                            final Test2 test2 = new Test2();
+                            test2.name = "bbbbb";
+                            return Observable.create(new ObservableOnSubscribe<Common>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<Common> emitter) throws Exception {
+                                    emitter.onNext(test2);
+                                }
+                            });
+                        }
+                    }
+                })
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        if (o instanceof Test1) {
+                            Log.i(TAG, "Test1 = " + ((Test1) o).name);
+                        } else if (o instanceof Test2) {
+                            Log.i(TAG, "Test2 = " + ((Test2) o).name);
+                        }
+                    }
+                });
     }
 
     @SuppressLint("CheckResult")
