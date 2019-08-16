@@ -1,8 +1,7 @@
 package com.xiaox.studydemo.aboutDataStructure.practice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 /**
  * 输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，
@@ -32,7 +31,7 @@ public class TreeDepth {
         node3.right = node6;
         node6.right = node7;
 
-        treeDepth1(node1);
+        int i = treeDepth1(node1);
 
     }
 
@@ -57,13 +56,13 @@ public class TreeDepth {
         if (root == null) {
             return 0;
         }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        List<TreeNode> queue = new ArrayList<>();
         queue.add(root);
         int depth = 0;
         int count = 0;//记录遍历到这一层的第几个节点
         int nextCount = 1;//记录当层节点的个数
         while (queue.size() != 0) {
-            TreeNode top = queue.poll();
+            TreeNode top = queue.remove(0);
             count++;
             if (top.left != null) {
                 queue.add(top.left);
