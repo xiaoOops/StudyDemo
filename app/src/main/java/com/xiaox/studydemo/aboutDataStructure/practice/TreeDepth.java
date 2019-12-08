@@ -31,7 +31,8 @@ public class TreeDepth {
         node3.right = node6;
         node6.right = node7;
 
-        int i = treeDepth1(node1);
+        int i = treeDepth(node1);
+        System.out.println(i);
 
     }
 
